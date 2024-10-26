@@ -17,7 +17,7 @@ class MovieRemoteDataSource @Inject constructor(
     ): MutableList<ListedMovieModel>? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = moviesApi.discoverMovies(page)
+                val response = moviesApi.getPopularMovies(page)
                 var responseFormatted: MutableList<ListedMovieModel> = mutableListOf()
                 response.body()?.results?.forEach({ dto ->
                     responseFormatted.add(dto.toListedMovieModel())
