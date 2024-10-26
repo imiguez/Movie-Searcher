@@ -24,6 +24,7 @@ android {
         val apiKey = localProperties.getProperty("TMDB_API_KEY")
         buildConfigField("String", "TMDB_API_KEY", "\"$apiKey\"")
         buildConfigField("String", "TMBD_API_BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "TMBD_IMAGES_BASE_URL", "\"https://image.tmdb.org/t/p/\"")
 
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -65,6 +66,13 @@ dependencies {
     implementation(libs.retrofit.gson)
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.ktor)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)

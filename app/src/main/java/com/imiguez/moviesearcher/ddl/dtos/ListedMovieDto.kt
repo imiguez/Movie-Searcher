@@ -28,7 +28,7 @@ class ListedMovieDto(
             popularity = popularity,
             posterPath = posterPath,
             voteAverage = voteAverage,
-            voteCount = voteCount
+            releaseDate = releaseDate
         )
     }
 }

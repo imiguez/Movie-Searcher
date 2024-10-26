@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.imiguez.moviesearcher.ui.home.HomeScreen
 import com.imiguez.moviesearcher.ui.home.HomeViewModel
+import com.imiguez.moviesearcher.ui.themes.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,9 +17,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent{
-            HomeScreen(
-                homeViewModel = _homeViewModel
-            )
+            AppTheme {
+                HomeScreen(
+                    homeViewModel = _homeViewModel
+                )
+            }
         }
     }
 }

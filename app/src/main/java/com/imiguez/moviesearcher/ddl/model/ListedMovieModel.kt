@@ -7,7 +7,7 @@ class ListedMovieModel(
     val popularity: Double,
     val posterPath: String,
     val voteAverage: Double,
-    val voteCount: Int
+    val releaseDate: String
 ) {
 
 }
