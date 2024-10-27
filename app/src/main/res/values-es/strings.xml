@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie Searcher</string>
+    <string name="genres">Géneros</string>
+    <string name="play">Reproducir</string>
+</resources>
