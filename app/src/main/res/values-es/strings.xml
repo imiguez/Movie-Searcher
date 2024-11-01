@@ -3,4 +3,5 @@
     <string name="app_name">Movie Searcher</string>
     <string name="genres">Géneros</string>
     <string name="play">Reproducir</string>
+    <string name="reload">Recargar</string>
 </resources>
