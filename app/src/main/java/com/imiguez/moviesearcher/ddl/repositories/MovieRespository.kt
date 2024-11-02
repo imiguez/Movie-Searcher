@@ -16,4 +16,8 @@ class MovieRespository @Inject constructor(
         return movieRemoteDataSource.getMovieDetails(id)
     }
 
+    suspend fun searchMovieByText(query: String, page: Int): List<ListedMovieModel>? {
+        return movieRemoteDataSource.searchMovieByText(query, page)
+    }
+
 }

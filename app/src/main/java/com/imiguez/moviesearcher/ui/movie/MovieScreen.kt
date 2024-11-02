@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.imiguez.moviesearcher.ui.common.FetchError
+import com.imiguez.moviesearcher.ui.common.components.FetchError
 import com.imiguez.moviesearcher.ui.movie.components.MovieDetails
 
 @Composable
@@ -39,10 +39,7 @@ fun MovieScreen (
         Column(
             modifier = Modifier.fillMaxWidth(),
         ) {
-            if (error.exists) FetchError(
-                msg = error.msg,
-                onReload = { movieViewModel.getMovieDetails(id) }
-            )
+            if (error.exists) FetchError(error)
             else MovieDetails(movie!!)
         }
     }

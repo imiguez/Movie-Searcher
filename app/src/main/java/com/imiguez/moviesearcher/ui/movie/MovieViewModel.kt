@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.imiguez.moviesearcher.ddl.model.MovieDetailsModel
 import com.imiguez.moviesearcher.ddl.repositories.MovieRespository
+import com.imiguez.moviesearcher.ui.common.utils.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,16 +16,12 @@ class MovieViewModel @Inject constructor(
     private val moviesRepo: MovieRespository
 ): ViewModel() {
 
-    data class ErrorState (
-        var msg: String,
-        var exists: Boolean
-    )
-
     private val _loading = MutableStateFlow<Boolean>(true)
     val loading = _loading.asStateFlow()
     private val _error = MutableStateFlow<ErrorState>(ErrorState(
             msg = "",
             exists = false,
+            lastAction = {}
         )
     )
 
@@ -41,8 +38,7 @@ class MovieViewModel @Inject constructor(
 
     fun getMovieDetails(id: Int) {
         viewModelScope.launch {
-            _error.value.msg = ""
-            _error.value.exists = false
+            _error.value.lastAction = { getMovieDetails(id) }
             _loading.value = true
             try {
                 val response = moviesRepo.getMovieDetails(id)

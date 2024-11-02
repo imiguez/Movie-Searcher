@@ -33,4 +33,16 @@ class MovieRemoteDataSource @Inject constructor(
             return@withContext response.body()?.toMovieDetailsModel()
         }
     }
+
+    suspend fun searchMovieByText(query: String, page: Int): MutableList<ListedMovieModel>? {
+        return withContext(Dispatchers.IO) {
+            val response = moviesApi.searchMovieByText(query, page)
+            if (response.code() != 200) throw IOException("Response error, status code: " + response.code())
+            var responseFormatted: MutableList<ListedMovieModel> = mutableListOf()
+            response.body()?.results?.forEach({ dto ->
+                responseFormatted.add(dto.toListedMovieModel())
+            })
+            return@withContext responseFormatted
+        }
+    }
 }

@@ -42,7 +42,7 @@ import com.imiguez.moviesearcher.ddl.model.ListedMovieModel
 @Composable
 fun MoviePosterButton (
     movie: ListedMovieModel,
-    onPress: () -> Unit
+    onPress: () -> Unit,
 ) {
     Button(
         onPress,
@@ -51,7 +51,7 @@ fun MoviePosterButton (
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         contentPadding = PaddingValues(0.dp),
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.padding(top = 8.dp).fillMaxSize()
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             // TODO: handle image loading and error.

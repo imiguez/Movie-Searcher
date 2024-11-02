@@ -19,7 +19,7 @@ fun MoviesScrollContainer(
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 150.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .fillMaxWidth()

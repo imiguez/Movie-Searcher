@@ -1,4 +1,4 @@
-package com.imiguez.moviesearcher.ui.common
+package com.imiguez.moviesearcher.ui.common.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.imiguez.moviesearcher.R
+import com.imiguez.moviesearcher.ui.common.utils.ErrorState
 
 @Composable
 fun FetchError (
-    msg: String,
-    onReload: () -> Unit
+    errorState: ErrorState,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -24,11 +24,11 @@ fun FetchError (
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = msg,
+            text = errorState.msg,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center
         )
-        Button(onClick = onReload) {
+        Button(onClick = errorState.lastAction) {
             Text(stringResource(R.string.reload))
         }
     }
