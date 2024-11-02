@@ -79,7 +79,7 @@ class HomeViewModel @Inject constructor(
 
     fun searchMovieByText() {
         _movies.value = mutableListOf()
-        if (query.equals("")) {
+        if (_query.value.isNullOrEmpty()) {
             getPopularMovies()
             return
         }
