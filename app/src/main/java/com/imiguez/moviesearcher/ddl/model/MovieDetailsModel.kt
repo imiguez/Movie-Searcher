@@ -10,5 +10,6 @@ class MovieDetailsModel (
     val overview: String,
     val releaseDate: String,
     val title: String,
+    val originalTitle: String,
     val voteAverage: Double,
 )

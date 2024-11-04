@@ -8,42 +8,35 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.imiguez.moviesearcher.BuildConfig
 import com.imiguez.moviesearcher.R
 import com.imiguez.moviesearcher.ddl.model.MovieDetailsModel
+import com.imiguez.moviesearcher.ui.common.utils.DateFormatter
 
 @Composable
 fun MovieDetails (
     movie: MovieDetailsModel
 ) {
-    MovieBackdrop("${BuildConfig.TMBD_IMAGES_BASE_URL}w500${movie?.backdropPath}")
+    MovieBackdrop("${BuildConfig.TMBD_IMAGES_BASE_URL}w500${movie?.backdropPath}", movie.voteAverage)
     Column(
-        modifier = Modifier.padding(10.dp),
+        modifier = Modifier.padding(horizontal = 10.dp).padding(bottom = 10.dp),
     ) {
-        Text(
-            text = movie.title,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground
-        )
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 5.dp).padding(top = 10.dp),
+            modifier = Modifier.fillMaxWidth().padding(top = 5.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
@@ -52,30 +45,42 @@ fun MovieDetails (
                 fontSize = 10.sp,
             )
             Text(
-                text = movie.releaseDate,
+                text = DateFormatter.format(movie.releaseDate),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 10.sp,
             )
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Icon(
-                Icons.Default.Star,
-                null,
-                tint = colorResource(R.color.golden),
-                modifier = Modifier.width(25.dp)
-            )
+
+        Text(
+            modifier = Modifier.padding(vertical = 10.dp),
+            text = movie.title,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        if (!movie.title.lowercase().equals(movie.originalTitle.lowercase())) {
             Text(
-                modifier = Modifier.padding(start = 2.dp, top = 2.dp),
-                text = String.format("%.1f", movie.voteAverage),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold,
+                text = buildAnnotatedString {
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(stringResource(R.string.original_title)+ ": ")
+                    }
+                    append(movie.originalTitle)
+                },
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
+
         Text(
             modifier = Modifier.padding(top = 10.dp),
-            text = movie.overview,
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(stringResource(R.string.synopsis)+ ": ")
+                }
+                append(movie.overview)
+            },
+            fontSize = 12.sp,
             color = MaterialTheme.colorScheme.onBackground
         )
 

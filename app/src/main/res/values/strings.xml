@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Movie Searcher</string>
+    <string name="original_title">Original title</string>
+    <string name="synopsis">Synopsis</string>
     <string name="genres">Genres</string>
     <string name="play">Play</string>
     <string name="reload">Reload</string>

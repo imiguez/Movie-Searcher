@@ -38,6 +38,7 @@ import coil3.compose.AsyncImage
 import com.imiguez.moviesearcher.BuildConfig
 import com.imiguez.moviesearcher.R
 import com.imiguez.moviesearcher.ddl.model.ListedMovieModel
+import com.imiguez.moviesearcher.ui.common.utils.DateFormatter
 
 @Composable
 fun MoviePosterButton (
@@ -109,23 +110,27 @@ fun MoviePosterButton (
                     fontSize = 10.sp,
                 )
                 Text(
-                    text = movie.releaseDate,
+                    text = DateFormatter.format(movie.releaseDate),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 10.sp,
                 )
             }
 
-            Text(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(horizontal = 5.dp),
-                color = MaterialTheme.colorScheme.onBackground,
-                text = movie.title,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold,
-                minLines = 2,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
+            Box(
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 5.dp).padding(vertical = 10.dp),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    text = movie.title,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    minLines = 2,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }

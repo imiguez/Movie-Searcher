@@ -40,6 +40,7 @@ data class MovieDetailsDto (
             overview = this.overview,
             releaseDate = this.releaseDate,
             title = this.title,
+            originalTitle = this.originalTitle,
             voteAverage = this.voteAverage,
         )
     }
