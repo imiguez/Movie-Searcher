@@ -1,4 +1,6 @@
 <resources>
+    <string name="english">English</string>
+    <string name="spanish">Spanish</string>
     <string name="app_name">Movie Searcher</string>
     <string name="original_title">Original title</string>
     <string name="synopsis">Synopsis</string>

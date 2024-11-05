@@ -110,7 +110,7 @@ fun MoviePosterButton (
                     fontSize = 10.sp,
                 )
                 Text(
-                    text = DateFormatter.format(movie.releaseDate),
+                    text = DateFormatter.getYear(movie.releaseDate),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 10.sp,
                 )

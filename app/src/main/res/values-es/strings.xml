@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="english">Inglés</string>
+    <string name="spanish">Español</string>
     <string name="app_name">Movie Searcher</string>
     <string name="original_title">Título original</string>
     <string name="synopsis">Sinopsis</string>

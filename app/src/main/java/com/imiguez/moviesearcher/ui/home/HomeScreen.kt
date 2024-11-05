@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.imiguez.moviesearcher.ui.common.components.FetchError
+import com.imiguez.moviesearcher.ui.home.components.LanguageButton
 import com.imiguez.moviesearcher.ui.home.components.MoviesScrollContainer
 import com.imiguez.moviesearcher.ui.home.components.SearchBar
 
@@ -36,6 +37,7 @@ fun HomeScreen (
     Column (
         modifier = Modifier.background(MaterialTheme.colorScheme.background)
     ) {
+        LanguageButton()
         SearchBar(
             viewModel = homeViewModel,
         )

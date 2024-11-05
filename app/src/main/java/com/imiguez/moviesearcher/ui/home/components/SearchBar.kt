@@ -32,7 +32,7 @@ fun SearchBar(
         modifier = Modifier.fillMaxWidth()
     ) {
         TextField(
-            modifier = Modifier.padding(horizontal = 8.dp).padding(top = 8.dp).fillMaxWidth(),
+            modifier = Modifier.padding(horizontal = 8.dp).fillMaxWidth(),
             maxLines = 1,
             value = query,
             onValueChange = { newText ->
