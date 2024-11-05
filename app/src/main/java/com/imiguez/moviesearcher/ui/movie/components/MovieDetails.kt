@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.imiguez.moviesearcher.BuildConfig
 import com.imiguez.moviesearcher.R
 import com.imiguez.moviesearcher.ddl.model.MovieDetailsModel
 import com.imiguez.moviesearcher.ui.common.utils.DateFormatter
@@ -31,7 +30,7 @@ import com.imiguez.moviesearcher.ui.common.utils.DateFormatter
 fun MovieDetails (
     movie: MovieDetailsModel
 ) {
-    MovieBackdrop("${BuildConfig.TMBD_IMAGES_BASE_URL}w500${movie?.backdropPath}", movie.voteAverage)
+    MovieBackdrop(movie.backdropPath, movie.voteAverage)
     Column(
         modifier = Modifier.padding(horizontal = 10.dp).padding(bottom = 10.dp),
     ) {
@@ -40,12 +39,12 @@ fun MovieDetails (
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = if (movie.adult) "+18" else "ATP",
+                text = if (movie.adult == true) "+18" else "ATP",
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 10.sp,
             )
             Text(
-                text = DateFormatter.format(movie.releaseDate),
+                text = if (!movie.releaseDate.isNullOrBlank()) DateFormatter.format(movie.releaseDate) else "",
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 10.sp,
             )
@@ -53,13 +52,13 @@ fun MovieDetails (
 
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
-            text = movie.title,
+            text = movie.title ?: "",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground
         )
 
-        if (!movie.title.lowercase().equals(movie.originalTitle.lowercase())) {
+        if (!movie.title.isNullOrBlank() && !movie.originalTitle.isNullOrBlank() && !movie.title.lowercase().equals(movie.originalTitle.lowercase())) {
             Text(
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
@@ -85,15 +84,17 @@ fun MovieDetails (
         )
 
         var genres = ""
-        movie.genres.forEachIndexed { index, genre ->
-            genres += genre.name + if (index+1 < movie.genres.size) ", " else "."
+        if (!movie.genres.isNullOrEmpty()) {
+            movie.genres.forEachIndexed { index, genre ->
+                genres += genre.name + if (index+1 < movie.genres.size) ", " else "."
+            }
+            Text(
+                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                text = stringResource(R.string.genres) +": $genres",
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 12.sp,
+            )
         }
-        Text(
-            modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
-            text = stringResource(R.string.genres) +": $genres",
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 12.sp,
-        )
 
         Button(
             modifier = Modifier.fillMaxWidth().padding(vertical = 20.dp),

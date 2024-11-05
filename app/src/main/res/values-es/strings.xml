@@ -9,4 +9,5 @@
     <string name="play">Reproducir</string>
     <string name="reload">Recargar</string>
     <string name="search">Buscar</string>
+    <string name="image_fetched_failed">No se pudo obtener la imagen</string>
 </resources>

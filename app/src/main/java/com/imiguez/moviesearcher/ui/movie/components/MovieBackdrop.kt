@@ -1,6 +1,5 @@
 package com.imiguez.moviesearcher.ui.movie.components
 
-import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -29,27 +29,41 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.imiguez.moviesearcher.BuildConfig
 import com.imiguez.moviesearcher.R
+import com.imiguez.moviesearcher.ui.common.components.ImageFetchedError
 
 @Composable
 fun MovieBackdrop (
     path: String?,
-    voteAverage: Double
+    voteAverage: Double?
 ) {
     val redContrast = colorResource(R.color.red_contrast)
+    val onBgColor = MaterialTheme.colorScheme.onBackground
 
-    if (path != null) {
-        Box(
-            contentAlignment = Alignment.BottomStart,
-        ) {
+    Box(
+        modifier = Modifier.fillMaxWidth()
+            .aspectRatio(500f / 281f)
+            .drawBehind {
+                val strokeWidth = 2 * density
+                val y = size.height - strokeWidth / 2
+                val c = onBgColor.copy(alpha = .1f)
+                drawLine(
+                    c,
+                    Offset(0f, y),
+                    Offset(size.width, y),
+                    strokeWidth
+                )
+            }
+        ,
+        contentAlignment = if (!path.isNullOrBlank()) Alignment.TopStart else Alignment.Center,
+    ) {
+        if (!path.isNullOrBlank()) {
             AsyncImage(
-                model = path,
+                model = "${ BuildConfig.TMBD_IMAGES_BASE_URL}w500$path",
                 contentDescription = null,
                 modifier = Modifier.fillMaxWidth()
                     .aspectRatio(500f / 281f),
-                onError = { error ->
-                    Log.e("Image Load Error", error.toString())
-                }
             )
             Row {
                 Row(
@@ -106,9 +120,8 @@ fun MovieBackdrop (
                     )
                 }
             }
+        } else {
+            ImageFetchedError(iconModifier = Modifier.size(100.dp))
         }
-    } else {
-        // TODO: Add a broken image icon
     }
-
 }
