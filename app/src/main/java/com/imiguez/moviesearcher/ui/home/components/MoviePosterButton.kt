@@ -74,7 +74,7 @@ fun MoviePosterButton (
                 },
                 contentAlignment = Alignment.TopStart
             ) {
-                if (!movie.posterPath.isNullOrBlank() && false) {
+                if (!movie.posterPath.isNullOrBlank()) {
                     AsyncImage(
                         model = "${BuildConfig.TMBD_IMAGES_BASE_URL}w500${movie.posterPath}",
                         contentDescription = null,
