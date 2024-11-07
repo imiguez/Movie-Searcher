@@ -1,8 +1,10 @@
 package com.imiguez.moviesearcher.di
 
+import androidx.compose.ui.text.intl.Locale
 import com.imiguez.moviesearcher.BuildConfig
-import com.imiguez.moviesearcher.ddl.ApiKeyInterceptor
+import com.imiguez.moviesearcher.ddl.interceptors.ApiKeyInterceptor
 import com.imiguez.moviesearcher.ddl.apis.MoviesApi
+import com.imiguez.moviesearcher.ddl.interceptors.LanguageInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +21,7 @@ class TMDBModule {
     fun provideRetrofit(): Retrofit {
         val client = OkHttpClient.Builder()
             .addInterceptor(ApiKeyInterceptor(BuildConfig.TMDB_API_KEY))
+            .addInterceptor(LanguageInterceptor(Locale.current.toLanguageTag()))
             .build()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.TMBD_API_BASE_URL)

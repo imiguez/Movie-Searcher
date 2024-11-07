@@ -1,4 +1,4 @@
-package com.imiguez.moviesearcher.ddl
+package com.imiguez.moviesearcher.ddl.interceptors
 
 import okhttp3.Interceptor
 import okhttp3.Response

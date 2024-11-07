@@ -29,7 +29,7 @@ fun SearchBar(
 ) {
     val query by viewModel.query.collectAsStateWithLifecycle()
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
     ) {
         TextField(
             modifier = Modifier.padding(horizontal = 8.dp).fillMaxWidth(),
