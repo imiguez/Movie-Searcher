@@ -10,4 +10,6 @@
     <string name="reload">Recargar</string>
     <string name="search">Buscar</string>
     <string name="image_fetched_failed">No se pudo obtener la imagen</string>
+
+    <string name="a_problem_has_occurred">Ha ocurrido un problema</string>
 </resources>

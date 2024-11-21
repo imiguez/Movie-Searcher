@@ -38,11 +38,13 @@ fun MovieScreen (
             CircularProgressIndicator()
         }
     } else {
-        Column(
-            modifier = Modifier.verticalScroll(rememberScrollState()).fillMaxWidth(),
-        ) {
-            if (error.exists) FetchError(error)
-            else MovieDetails(movie!!)
+        if (error.exists) FetchError(error)
+        else {
+            Column(
+                modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
+            ) {
+                MovieDetails(movie!!)
+            }
         }
     }
 }

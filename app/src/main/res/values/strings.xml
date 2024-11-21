@@ -9,4 +9,6 @@
     <string name="reload">Reload</string>
     <string name="search">Search</string>
     <string name="image_fetched_failed">The image could not be fetched</string>
+
+    <string name="a_problem_has_occurred">A problem has occurred</string>
 </resources>

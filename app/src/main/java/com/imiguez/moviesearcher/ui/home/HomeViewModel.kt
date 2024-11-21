@@ -1,11 +1,14 @@
 package com.imiguez.moviesearcher.ui.home
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.imiguez.moviesearcher.R
 import com.imiguez.moviesearcher.ddl.model.ListedMovieModel
 import com.imiguez.moviesearcher.ddl.repositories.MovieRespository
 import com.imiguez.moviesearcher.ui.common.utils.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -13,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val moviesRepo: MovieRespository
 ): ViewModel() {
 
@@ -67,7 +71,7 @@ class HomeViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 _error.value = ErrorState(
-                    msg = e.message.toString(),
+                    msg = context.getString(R.string.a_problem_has_occurred),
                     exists = true,
                     lastAction = { if (calledFromSearch) searchMovieByText() else getPopularMovies() }
                 )
@@ -95,7 +99,7 @@ class HomeViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 _error.value = ErrorState(
-                    msg = e.message.toString(),
+                    msg = context.getString(R.string.a_problem_has_occurred),
                     exists = true,
                     lastAction = { searchMovieByText() }
                 )
